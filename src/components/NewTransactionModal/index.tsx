@@ -23,7 +23,7 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
 
   const { createTransaction } = useContext(TransactionsContext)
 
-  function handleCreateNewTransaction(event: FormEvent) {
+  async function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault()
 
     const data = {
@@ -33,8 +33,12 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
       category
     }
 
-    createTransaction(data)
+    await createTransaction(data)
     onRequestClose()
+    setTitle('')
+    setAmount(0)
+    setCategory('')
+    setType('deposit')
   }
 
   return (
